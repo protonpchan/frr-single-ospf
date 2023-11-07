@@ -1,0 +1,73 @@
+=====================
+How to run this lab?
+=====================
+$ git clone git@github.com:protonpchan/frr-single-ospf.git
+$ cd frr-single-ospf/
+$ ./run
+$ sudo clab destroy -t lab.yml
+INFO[0000] Parsing & checking topology file: lab.yml    
+INFO[0000] Destroying lab: lab                          
+INFO[0000] Removed container: clab-lab-router2          
+INFO[0000] Removed container: clab-lab-PC1              
+INFO[0000] Removed container: clab-lab-PC2              
+INFO[0000] Removed container: clab-lab-router1          
+INFO[0000] Removing containerlab host entries from /etc/hosts file 
+pchan@LAPTOP-UP9VD31I:/tmp/frr-single-ospf$ ./run.sh 
+INFO[0000] Containerlab v0.46.1 started                 
+INFO[0000] Parsing & checking topology file: lab.yml    
+INFO[0000] Creating docker network: Name="clab", IPv4Subnet="172.20.20.0/24", IPv6Subnet="2001:172:20:20::/64", MTU="1500" 
+INFO[0000] Creating lab directory: /tmp/frr-single-ospf/clab-lab 
+INFO[0000] Creating container: "router2"                
+INFO[0000] Creating container: "PC2"                    
+INFO[0000] Creating container: "router1"                
+INFO[0000] Creating container: "PC1"                    
+INFO[0000] Creating link: router1:eth1 <--> router2:eth1 
+INFO[0000] Creating link: PC1:eth1 <--> router1:eth2    
+INFO[0000] Creating link: PC2:eth1 <--> router2:eth2    
+INFO[0001] Adding containerlab host entries to /etc/hosts file 
++---+------------------+--------------+---------------------------------+-------+---------+----------------+----------------------+
+| # |       Name       | Container ID |              Image              | Kind  |  State  |  IPv4 Address  |     IPv6 Address     |
++---+------------------+--------------+---------------------------------+-------+---------+----------------+----------------------+
+| 1 | clab-lab-PC1     | 7dacd946c6f8 | praqma/network-multitool:latest | linux | running | 172.20.20.4/24 | 2001:172:20:20::4/64 |
+| 2 | clab-lab-PC2     | 6cd2b5f74aba | praqma/network-multitool:latest | linux | running | 172.20.20.5/24 | 2001:172:20:20::5/64 |
+| 3 | clab-lab-router1 | a8a52d036c11 | frrouting/frr:v7.5.1            | linux | running | 172.20.20.3/24 | 2001:172:20:20::3/64 |
+| 4 | clab-lab-router2 | 3ffa1bc9d2a3 | frrouting/frr:v7.5.1            | linux | running | 172.20.20.2/24 | 2001:172:20:20::2/64 |
++---+------------------+--------------+---------------------------------+-------+---------+----------------+----------------------+
+
+=====================
+Useful commands
+=====================
+1. Deploy lab
+# sudo clab deploy -t lab.yml
+
+1. Destroy lab
+$ sudo clab destroy -t lab.yml
+
+2. Reconfigure lab
+$ sudo clab deploy -t lab.yml --reconfigure
+
+3. Show docker info
+# sudo docker container ls
+
+4. Test routing commands
+docker exec clab-lab-router1 ping 192.168.12.2
+docker exec clab-lab-router1 ping 10.10.10.2
+docker exec clab-lab-router1 ping 192.168.2.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
