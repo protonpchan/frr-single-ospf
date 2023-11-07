@@ -1,3 +1,3 @@
 #! /bin/bash
-sudo clab deploy --topo lab.yml
+sudo clab deploy --topo lab.yml --reconfigure
 ./NIC-UP.sh
